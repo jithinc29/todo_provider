@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_provider/home.dart';
+import 'package:todo_provider/models/task_data.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( ChangeNotifierProvider(
+    create: (BuildContext context) =>TaskData(),
+    child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
        
       ),
-      home: const Home()
+      home:  Home()
     );
   }
 }

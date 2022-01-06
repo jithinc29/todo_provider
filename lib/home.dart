@@ -1,21 +1,12 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:todo_provider/models/task.dart';
+import 'package:todo_provider/models/task_data.dart';
+
 import 'package:todo_provider/widgets/add_task_screen.dart';
 import 'package:todo_provider/widgets/tasks_list.dart';
+import 'package:provider/provider.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  List<Task> tasks = [
-    
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +34,7 @@ class _HomeState extends State<Home> {
                     style: TextStyle(fontSize: 60, color: Colors.white),
                   ),
                   Text(
-                    "${tasks.length} Tasks",
+                    "${Provider.of<TaskData>(context).taskcount} Tasks",
                     style: const TextStyle(fontSize: 20, color: Colors.white),
                   )
                 ],
@@ -58,7 +49,7 @@ class _HomeState extends State<Home> {
                     topRight: Radius.circular(20),
                   ),
                 ),
-                child: TasksList(tasks),
+                child: const TasksList(),
               ),
             ),
           ],
@@ -66,13 +57,9 @@ class _HomeState extends State<Home> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
-                context: context,
-                builder: (context) => AddTaskScreen((String newTaskTitle) {
-                      setState(() {
-                        tasks.add(Task(name: newTaskTitle));
-                      });
-                      Navigator.pop(context);
-                    }));
+              context: context,
+              builder: (context) => AddTaskScreen(),
+            );
           },
           child: const Icon(Icons.add),
         ),
