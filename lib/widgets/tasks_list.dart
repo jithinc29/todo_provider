@@ -6,6 +6,7 @@ import 'package:todo_provider/widgets/tasks_tile.dart';
 class TasksList extends StatefulWidget {
 
   final List<Task> tasks;
+  // ignore: use_key_in_widget_constructors
   const TasksList(this.tasks);
   @override
   State<TasksList> createState() => _TasksListState();

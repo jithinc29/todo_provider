@@ -1,4 +1,4 @@
-import 'dart:ui';
+
 
 import 'package:flutter/material.dart';
 import 'package:todo_provider/models/task.dart';
@@ -6,6 +6,7 @@ import 'package:todo_provider/widgets/add_task_screen.dart';
 import 'package:todo_provider/widgets/tasks_list.dart';
 
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -13,9 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Task> tasks = [
-    Task(name: 'STUDY UI'),
-    Task(name: 'STUDY API'),
-    Task(name: 'STUDY DATABASE')
+    
   ];
 
   @override
@@ -27,11 +26,11 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  CircleAvatar(
+                children: [
+                  const CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 40,
                     child: Icon(
@@ -39,13 +38,13 @@ class _HomeState extends State<Home> {
                       size: 40,
                     ),
                   ),
-                  Text(
+                  const Text(
                     "Todoey",
                     style: TextStyle(fontSize: 60, color: Colors.white),
                   ),
                   Text(
-                    "12 Tasks",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    "${tasks.length} Tasks",
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
                   )
                 ],
               ),
@@ -61,23 +60,23 @@ class _HomeState extends State<Home> {
                 ),
                 child: TasksList(tasks),
               ),
-              
             ),
-            
           ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-
-            showModalBottomSheet(context: context, builder: (context)=>AddTaskScreen());
+            showModalBottomSheet(
+                context: context,
+                builder: (context) => AddTaskScreen((String newTaskTitle) {
+                      setState(() {
+                        tasks.add(Task(name: newTaskTitle));
+                      });
+                      Navigator.pop(context);
+                    }));
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
       ),
     );
   }
 }
-
-
-
-

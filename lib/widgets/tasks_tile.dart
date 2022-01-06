@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TasksTile extends StatelessWidget {
-  TasksTile({
+  // ignore: use_key_in_widget_constructors
+  const TasksTile({
     required this.isChecked,
     required this.taskTitle,
     required this.checkboxCallback,
